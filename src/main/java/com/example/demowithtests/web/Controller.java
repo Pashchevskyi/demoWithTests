@@ -16,45 +16,42 @@ public class Controller {
 
     private final Service service;
 
-    //Операция сохранения юзера в базу данных
+    //Save user to database
     @PostMapping("/users")
     @ResponseStatus(HttpStatus.CREATED)
     public Employee saveEmployee(@RequestBody Employee employee) {
         return service.create(employee);
     }
 
-    //Получение списка юзеров
+    //Users list
     @GetMapping("/users")
     @ResponseStatus(HttpStatus.OK)
     public List<Employee> getAllUsers() {
         return service.getAll();
     }
 
-    //Получения юзера по id
+    //Get user by id
     @GetMapping("/users/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Employee getEmployeeById(@PathVariable Integer id) {
-
-        Employee employee = service.getById(id);
-        return employee;
+        return service.getById(id);
     }
 
-    //Обновление юзера
+    //Update user
     @PutMapping("/users/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Employee refreshEmployee(@PathVariable("id") Integer id, @RequestBody Employee employee) {
-
+    public Employee refreshEmployee(@PathVariable Integer id, @RequestBody Employee employee) {
         return service.updateById(id, employee);
     }
 
-    //Удаление по id
+    //Delete by id
     @PatchMapping("/users/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removeEmployeeById(@PathVariable Integer id) {
         service.removeById(id);
     }
 
-    //Удаление всех юзеров
+    //Delete all users
     @DeleteMapping("/users")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removeAllUsers() {
